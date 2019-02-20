@@ -10,7 +10,7 @@ import youtube_dl
 # of giving my bots token inside of a public repository
 
 # Variables
-TOKEN = 'NTQ2OTUzMDE2NjM3NTIxOTIw.D0vvSQ.Ifv74CE6SDo9nVTg0_IOX3zcJZU'
+TOKEN = 'SUB TO PEWDZ'
 client = commands.Bot(command_prefix='Alexia0 ')
 client.remove_command('help')
 questions = ['What was the best game of 2018?','What sex position do you think is most efficient?','What are your chores at home?',"What's your favorite fast food chain?",'What is your favorite type of rpg?(futuristic, fantasy, etc.)'
@@ -171,4 +171,4 @@ async def subgap():
     await client.say('https://www.youtube.com/watch?v=UVxU2HzPGug')
 
     
-client.run(TOKEN)
+client.run(os.getenv('TOKEN')

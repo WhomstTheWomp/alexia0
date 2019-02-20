@@ -6,6 +6,8 @@ import random
 import datetime
 import youtube_dl
 
+# Whoever was responsible for the r/fCord thing. it was funny, and thanks for pointing out my dumb ass mistake 
+# of giving my bots token inside of a public repository
 
 # Variables
 TOKEN = 'NTQ2OTUzMDE2NjM3NTIxOTIw.D0vvSQ.Ifv74CE6SDo9nVTg0_IOX3zcJZU'

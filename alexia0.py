@@ -169,4 +169,4 @@ async def subgap():
     await client.say('https://www.youtube.com/watch?v=UVxU2HzPGug')
 
     
-client.run(os.getenv('TOKEN'))
+client.run(TOKEN)

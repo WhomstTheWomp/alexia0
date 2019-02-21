@@ -121,12 +121,5 @@ async def on_message_delete(message):
 async def subgap():
     await client.say('https://www.youtube.com/watch?v=UVxU2HzPGug')
     
-@client.command(pass_context=True)
-async def search(ctx):
-    url = ctx.message.content
-    urlEncoded = urllib.quote(url[14:1000000000])
-    
-    await client.say('https://www.google.com/search?source=hp&ei=CCpvXPWAC-aK0wK6xpHYAw&q=' + urlEncoded + '&gs_l=psy-ab.3..0l10.972394.973005..973403...4.0..0.75.352.5......0....1..gws-wiz.....6..35i39j0i131.kPw9zdA-mOc'                  
 
-    
 client.run(os.getenv('TOKEN'))

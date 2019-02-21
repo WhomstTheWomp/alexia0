@@ -6,6 +6,7 @@ import random
 import datetime
 import youtube_dl
 import os
+import urllib
 
 # Whoever was responsible for the r/fCord thing. it was funny, and thanks for pointing out my dumb ass mistake 
 # of giving my bots token inside of a public repository
@@ -45,56 +46,7 @@ async def on_ready():
 async def qotd(ctx):
     await client.say('@here %s' % questions[random.randint(0,19)])
 
-
-# Music playing
-@client.command(pass_context=True)
-async def RISE(ctx):
-    channel = ctx.message.author.voice.voice_channel
-    await client.join_voice_channel(channel)
-
-@client.command(pass_context=True)
-async def die(ctx):
-    server = ctx.message.server
-    voice_client = client.voice_client_in(server)
-    await voice_client.disconnect()
-
-@client.command(pass_context=True)
-async def earrape(ctx, url):
-    server = ctx.message.server
-    voice_client = client.voice_client_in(server)
-    player = await voice_client.create_ytdl_player(url, after=lambda: check_queue(server.id))
-    players[server.id] = player
-    player.start()
-
-    await client.say('Music_startUp: Initiated')
-
-@client.command(pass_context=True)
-async def skip(ctx):
-    id = ctx.message.server.id
-    players[id].stop()
-
-@client.command(pass_context=True)
-async def holup(ctx):
-    id = ctx.message.server.id
-    players[id].pause()
-
-@client.command(pass_context=True)
-async def nvm(ctx):
-    id = ctx.message.server.id
-    players[id].resume()
-
-@client.command(pass_context=True)
-async def q(ctx, url):
-    server = ctx.message.server
-    voice_client = client.voice_client_in(server)
-    player = await voice_client.create_ytdl_player(url, after=lambda: check_queues(server.id))
-
-    if server.id in queues:
-        queues[server.id].append(player)
-    else:
-        queues[server.id] = [player]
-    await client.say('Music has been queued')
-
+    
 # Announcements
 @client.command(pass_context=True)
 async def announce(ctx):
@@ -132,16 +84,10 @@ async def help(ctx):
     
     dm.add_field(name = 'Prefix', value = 'The command prefix is "Alexia0 "')
     dm.add_field(name = 'qotd', value = 'Randomly selects a question and sends it (only works once per day)')
-    dm.add_field(name = 'RISE', value = 'Alexia0 will join whatever voice channel you are currently in')
-    dm.add_field(name = 'die', value = 'Alexia0 will leave the voice channel you are in')
-    dm.add_field(name = 'earrape', value = 'Alexia0 will play the following youtube video urls audio in the voice channel you are in')
-    dm.add_field(name = 'q', value = 'Will add the following youtube video url to the queue')
-    dm.add_field(name = 'skip', value = 'Skips the video being played')
-    dm.add_field(name = 'holup', value = 'Pauses the video being played')
-    dm.add_field(name = 'nvm', value = 'Resumes the video that was being played')
     dm.add_field(name = 'announce', value = 'Takes the text following the command and stores it. If you just type "Alexia0 announce" it will output the current announcments to the server')
     dm.add_field(name = 'version', value = 'Tells you the current version of Alexia0')
     dm.add_field(name = 'subgap', value = "Sends a url to FlareTv's youtube stream")
+    dm.add_field(name = 'hint', value = 'Dms a hint to the secret command to you')
     
     await client.send_message(author, embed = dm)
     
@@ -154,7 +100,12 @@ async def sucks(ctx):
     await client.send_message(author, 'T H E  F U C K  D I D  Y O U  J U S T  S A Y  T O  M E  Y O U  L I T T L E  S H I T')
 
     await client.say("Congratultions %s! You found the hidden command, ya' dick head!" % author)
-
+@client.command(pass_context=True)
+async def hint(ctx):
+    author = ctx.message.author
+    
+    await client.send_message(author, 'Alexia0 s___s (fill in the gap)')
+    
 
 # Embarresing people for fuck ups                  
 @client.event
@@ -169,6 +120,13 @@ async def on_message_delete(message):
 @client.command()
 async def subgap():
     await client.say('https://www.youtube.com/watch?v=UVxU2HzPGug')
+    
+@client.command(pass_context=True)
+async def search(ctx):
+    url = ctx.message.content
+    urlEncoded = urllib.quote(url[14:1000000000])
+    
+    await client.say('https://www.google.com/search?source=hp&ei=CCpvXPWAC-aK0wK6xpHYAw&q=' + urlEncoded + '&gs_l=psy-ab.3..0l10.972394.973005..973403...4.0..0.75.352.5......0....1..gws-wiz.....6..35i39j0i131.kPw9zdA-mOc'                  
 
     
 client.run(os.getenv('TOKEN'))

@@ -113,7 +113,7 @@ async def on_message_delete(message):
     channel = message.channel
     author = message.author
     
-    await client.send_message(channel, 'Did you fuck up, {}? (Message Deleted)' format(author))
+    await client.send_message(channel, 'Did you fuck up, @%s? (Message Deleted)' % author)
 
     
 # Misc Commands

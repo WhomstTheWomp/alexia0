@@ -113,18 +113,13 @@ async def on_message_delete(message):
     channel = message.channel
     author = message.author
     
-    await client.send_message(channel, 'Did you fuck up, @%s? (Message Deleted)' % author)
+    await client.send_message(channel, 'Did you fuck up, {}? (Message Deleted)' format(author))
 
     
 # Misc Commands
 @client.command()
 async def subgap():
     await client.say('https://www.youtube.com/watch?v=UVxU2HzPGug')
-    
-@client.command(pass_context=True)
-async def test(ctx):
-    author = ctx.message.author
-    await client.say('@{}'format(author))
     
     
 

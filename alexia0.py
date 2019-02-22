@@ -123,8 +123,8 @@ async def subgap():
     
 @client.command(pass_context=True)
 async def test(ctx):
-    author = ctx.message.author
-    await client.say('@' + author)
+    author = '@' + ctx.message.author
+    await client.say(author)
     
     
 

@@ -121,5 +121,11 @@ async def on_message_delete(message):
 async def subgap():
     await client.say('https://www.youtube.com/watch?v=UVxU2HzPGug')
     
+@client.command(pass_context=True)
+async def test(ctx):
+    author = ctx.message.author
+    await client.say('@%s' % author)
+    
+    
 
 client.run(os.getenv('TOKEN'))
